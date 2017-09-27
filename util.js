@@ -36,3 +36,25 @@ function goBack() {
     }
   }
 }
+//组合最大数
+function demo() {
+  var arr = [1, 20, 23, 4, 8];
+  var str = arr.toString();
+  var _arr = str.split(",");
+  console.log('Yes',max(_arr));
+}
+function max(arr) {
+  if(arr == '' || arr == null){
+    return '';
+  }
+  var big = arr[0];
+  var num = 0;
+  for (var i = 1; i < arr.length; i++) {
+    if(arr[i]>arr[i-1]){
+      big = arr[i];
+      num = i;
+    }
+  }
+  arr.splice(num,1);
+  return big+max(arr);
+}
