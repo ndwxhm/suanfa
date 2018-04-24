@@ -3,3 +3,4 @@
 moststr("abcdefgabca");
 #返回按钮
 goBack();
+#pc拖动canvas
