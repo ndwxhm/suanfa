@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <meta name="viewport" content="width=750, user-scalable=no">
+    <link rel="stylesheet" href="/e_css/index/2018/global.css">
+    <script src="/e_js/index/2018/jquery.min.js" charset="utf-8"></script>
+    <style>
+        a{
+        font-size: 36px;
+        line-height: 40px;
+      }
+    </style>
+</head>
+
+<body>
+    <a href="https://gaokao.eol.cn" class="eol_jlink" data-link="http://www.eol.cn">链接地址</a>
+    <script type="text/javascript">
+        var is_weixin = (function() {
+            return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1
+        })();
+        if (is_weixin) {
+            $('.eol_jlink').each(function(index, el) {
+                $(el).attr('href', $(el).attr('data-link'));
+            });
+        }
+    </script>
+    <!-- <script type="text/javascript">
+        var is_weixin = (function() {
+            return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1
+        })();
+        if (is_weixin) {
+            window.location.href = "https://www.eol.cn";
+        } else {
+            window.location.href = "https://gaokao.eol.cn";
+        }
+    </script> -->
+
+</body>
+
+</html>

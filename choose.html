@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>吃啥看天意</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <style type="text/css">
+        #box {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            position: relative;
+            border: 1px solid #ccc;
+        }
+
+        #start {
+            width: 50px;
+            height: 20px;
+            line-height: 20px;
+            color: #000;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+        }
+
+        #choose {
+            width: 200px;
+            height: 25px;
+            line-height: 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #FF9733;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            margin-left: -100px;
+            padding: 0;
+        }
+        #tuijian {
+            width: 200px;
+            height: 25px;
+            line-height: 20px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: red;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            margin-left: -100px;
+            padding: 0;
+        }
+
+        #food {
+            display: none;
+        }
+
+        #flashbox {
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .item {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="box">
+        <div id="food">
+            馄饨 拉面 烩面 热干面 刀削面 油泼面 炸酱面 炒面 重庆小面 米线 酸辣粉 土豆粉 螺狮粉 凉皮儿 麻辣烫肉夹馍 羊肉汤 炒饭 盖浇饭 卤肉饭 烤肉饭 黄焖鸡米饭 驴肉火烧 川菜 麻辣香锅 火锅 酸菜鱼 烤串 披萨 烤鸭 汉堡 炸鸡 寿司 蟹黄包 粽子 煎饼果子 生煎 炒年糕
+        </div>
+        <div id="flashbox"></div>
+        <input type="text" value="推荐中" id="tuijian">
+        <input type="text" value="请选择" id="choose">
+        <input type="button" id="start" value="开 始" onclick="start()">
+    </div>
+
+
+    <script language="javascript">
+        function flash() {
+            var list = $("#food").text().replace(/[\r\n]/g, "").replace(/ +/g, " ").replace(/^ | $/g, "").split(" ");
+            var num = list.length;
+            var choose = parseInt(num * Math.random());
+            var tjnum = parseInt(num * Math.random());
+            var text = list[choose];
+            $('#choose').val("抽中吃:" + text);
+            $('#tuijian').val("推荐吃:"+ list[tjnum]);
+            var $flashbox = $('#flashbox');
+            var rTop = Math.ceil(Math.random() * ($flashbox.height() - 30)),
+                rLeft = Math.ceil(Math.random() * ($flashbox.width() - 50)),
+                rSize = Math.ceil(Math.random() * (28 - 14) + 14);
+            $("<span class='item'></span>").html(text).hide().css({
+                "top": rTop,
+                "left": rLeft,
+                "color": "rgba(0,0,0,." + Math.random() + ")",
+                "fontSize": rSize + "px"
+            }).appendTo("#flashbox").fadeIn("slow", function () {
+                $(this).fadeOut("slow", function () {
+                    $(this).remove();
+                });
+            });
+        }
+        var timer;
+        function start() {
+            if ($("#start").val() == "开 始") {
+                timer = setInterval(function () {
+                    flash();
+                }, 100);
+                $("#start").val("暂 停");
+            } else {
+                clearInterval(timer);
+                $("#start").val("开 始");
+            }
+        }
+    </script>
+</body>
+
+</html>
